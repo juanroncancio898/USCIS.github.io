@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USCIS - Immigrant Fee - About you</title>
+    <link rel ="icon" href="assets/img/logo.svg" type="image/png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page-white">
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/img/USCIS_Signature_Preferred_FC.png" alt="USCIS Logo" class="logo-image">
+            </div>
+            <div class="search-container">
+            </div>
+        </div>
+    </header>
+
+    <!-- Área principal -->
+    <main class="main-content">
+        <section class="customizable-section3">         
+            <!-- Área para el párrafo central -->
+            <div class="paragraph-container3">
+                <p>You must complete all fields with an asterisk (<span style="color: red;">*</span>) to submit this form.</p>
+                <h1>USCIS Immigrant Fee</h1>
+                <div class="paragraph-area3">
+                    <ul style="list-style-type: none; margin-left:5px; margin-right: 210px;">
+                        <li style="margin-bottom: 12px;">You must provide an A-Number and Department of State Case ID (DOS Case ID) for each person who needs to pay the USCIS immigrant fee.</li>
+                        <li style="margin-bottom: 12px;">Your A-Number and Department of State Case ID (DOS Case ID) are both required and can be found in your visa packet.</li>
+                        <li><img src="assets/img/Immgdata.png" alt="Immigration Data" style="max-width: 100%; height: auto;"></li>
+                        <li style="margin-bottom: 12px;">Your A-Number is the letter “A” followed by 7, 8 or 9 numbers (such as A012345678). On a visa stamp, your A-Number is identified as a <b>Registration Number.</b></li>
+                        <li style="margin-bottom: 12px; margin-left: 20px;">If your A-Number is fewer than 9 digits, the system will automatically add zero(s) after the “A” and before the first digit so there is a total of 9 digits, for example: A-001234567.</li>
+                        <h2 style="font-size: 1.5rem;">What is your A-Number? <span style="color: red;">*</span></h2>
+                        <!-- Cuadro de texto similar al 'search-box' del index -->
+                                <div class="custom-search">
+                                    <input type="text" id="aNumberInput" class="search-box" placeholder="A-">
+                                </div>
+                        
+                        <li style="margin-bottom: 30px;">Provide a 7, 8, or 9-digit number. If the A-Number is fewer than 9 digits, the system will automatically add zero(s) after the "A" and before the first digit so there is a total of 9 digits, for example: A-001234567.</li>
+                        <li style="border-top: 2px solid #ADD8E6; margin: 20px 0;"></li>
+                        <li><h2 style="font-size: 1.5rem;">What is your DOS Case ID? <span style="color: red;">*</span></h2></li>
+                        <li style="margin-bottom: 12px;">Provide a 12 or 13-character ID. Your DOS Case ID is 3 letters followed by 9 or 10 numbers, for example: ABC0123456789.</li>
+                        <li style="margin-bottom: 12px;">If you are a Diversity Visa immigrant, your DOS Case ID will be 4 numbers followed by 2 letters and 5 more numbers, for example: 0000AB12345.</li>
+                        <li style="margin-bottom: 12px;">On your visa stamp, your DOS Case ID is identified as the IV Case Number. The IV Case Number has two numbers at the end, such as 01 or 02.</li>
+                        <li style="margin-bottom: 12px;">When entering the IV Case Number as the DOS Case ID, do not include the last two numbers. For example, if your IV Case Number is “ABC1234567801,” you would enter your DOS Case ID as “ABC12345678”. Do not include the “01”.</li>
+                        <!-- Cuadro de texto similar al 'search-box' del index -->
+                                <div class="custom-search">
+                                    <input type="text" id="dosCaseIdInput" class="search-box">
+                                </div>
+                        <li>Example: ABC123456789 or 1234AB12345</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Enlace de regreso -->
+            <div class="back-link">
+                <a href="4page.html"></i>Save entry</a>
+                <a href="2page.html" style="background-color: #ffffff; color: #0052cc; font-weight: bold; padding: 10px 20px; border: 1px solid #ffffff; border-radius: 5px;">Back</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-top-inner">
+                <div class="footer-logo">
+                    <img src="assets/img/USCIS_Signature_Preferred_FC.png" alt="USCIS Logo" class="logo-image">
+                    <img src="assets/img/ntas_03_noadvisories.svg" alt="NTAS Logo" class="logo-image" style="height:40px; margin-left:16px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/index.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const saveBtn = document.querySelector('.back-link a[href="4page.html"]');
+    const aNumberInput = document.getElementById('aNumberInput');
+    const dosCaseIdInput = document.getElementById('dosCaseIdInput');
+    // Crear mensaje de error si no existe
+    let errorMsg = document.getElementById('formErrorMsg');
+    if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.id = 'formErrorMsg';
+        errorMsg.style.color = '#c0392b';
+        errorMsg.style.fontWeight = 'bold';
+        errorMsg.style.margin = '16px 0 0 0';
+        errorMsg.style.display = 'none';
+        document.querySelector('.back-link').insertAdjacentElement('beforebegin', errorMsg);
+    }
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function (e) {
+            let valid = true;
+            // Validar A-Number: debe ser A- y 9 dígitos
+            const aVal = (aNumberInput && aNumberInput.value) ? aNumberInput.value.trim() : '';
+            valid = valid && /^A-\d{9}$/.test(aVal);
+            // Validar DOS Case ID: no vacío y al menos 10 caracteres
+            const dosVal = (dosCaseIdInput && dosCaseIdInput.value) ? dosCaseIdInput.value.trim() : '';
+            valid = valid && dosVal.length >= 10;
+            if (!valid) {
+                e.preventDefault();
+                errorMsg.textContent = 'Please complete all required fields with valid information before continuing.';
+                errorMsg.style.display = 'block';
+            } else {
+                errorMsg.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
